@@ -1,0 +1,66 @@
+# Docker Compose — Blockchain Voting System
+# Optional: Run everything together with Docker
+# Usage: docker-compose up --build
+
+version: '3.8'
+
+services:
+  # Local Ethereum Blockchain
+  ganache:
+    image: trufflesuite/ganache:latest
+    container_name: voting-ganache
+    ports:
+      - "7545:8545"
+    command: >
+      --accounts 20
+      --defaultBalanceEther 100
+      --gasLimit 6721975
+      --deterministic
+      --host 0.0.0.0
+    networks:
+      - voting-network
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: voting-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - GANACHE_URL=http://ganache:8545
+      - CONTRACT_ADDRESS=${CONTRACT_ADDRESS:-}
+      - ADMIN_WALLET_PRIVATE_KEY=${ADMIN_WALLET_PRIVATE_KEY:-}
+      - ADMIN_PASSWORD=admin123
+      - SECRET_KEY=blockchain-voting-jwt-secret-key-2026
+      - DATABASE_URL=sqlite:///./voting.db
+    volumes:
+      - ./backend:/app
+      - backend-data:/app/voter_faces
+    depends_on:
+      - ganache
+    networks:
+      - voting-network
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: voting-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - voting-network
+
+volumes:
+  backend-data:
+
+networks:
+  voting-network:
+    driver: bridge

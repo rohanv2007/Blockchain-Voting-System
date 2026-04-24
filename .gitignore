@@ -1,0 +1,54 @@
+# ─── Python ──────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+backend/venv/
+venv/
+.venv/
+
+# ─── Environment & Secrets (NEVER commit these!) ─
+backend/.env
+.env
+*.env.local
+
+# ─── Database ────────────────────────────────────
+*.db
+*.sqlite3
+
+# ─── Face Embeddings (biometric data) ────────────
+backend/voter_faces/*.npy
+backend/candidate_images/*
+!backend/candidate_images/.gitkeep
+
+# ─── Node.js ─────────────────────────────────────
+node_modules/
+frontend/node_modules/
+blockchain/node_modules/
+
+# ─── Build Outputs ───────────────────────────────
+frontend/dist/
+blockchain/build/
+
+# ─── IDE / OS ────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Logs ────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ─── DeepFace model cache ────────────────────────
+.deepface/

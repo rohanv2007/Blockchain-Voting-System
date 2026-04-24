@@ -1,0 +1,17 @@
+{
+  "name": "voting-blockchain",
+  "version": "1.0.0",
+  "description": "Blockchain layer for the Voting System - Truffle + Solidity",
+  "scripts": {
+    "compile": "truffle compile",
+    "migrate": "truffle migrate --network development",
+    "test": "truffle test --network development",
+    "reset": "truffle migrate --reset --network development"
+  },
+  "dependencies": {
+    "truffle": "^5.11.5"
+  },
+  "devDependencies": {
+    "@truffle/hdwallet-provider": "^2.1.15"
+  }
+}
