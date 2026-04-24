@@ -316,11 +316,7 @@ This provides an interactive Swagger UI for all API endpoints.
 
 ---
 
-## 🎓 Built For
-
-Final Year College Project — Blockchain-Based Voting System with Face Verification
-
-**Tech Stack:**
+## **Tech Stack:**
 - Solidity + Truffle + Ganache (Blockchain)
 - FastAPI + DeepFace + Web3.py (Backend)
 - React + Vite + Tailwind CSS + Recharts (Frontend)
